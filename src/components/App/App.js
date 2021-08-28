@@ -54,7 +54,7 @@ export const App = () => {
               onChange={e => setText(e.target.value)}
             />
 
-            <button>Submit</button>
+            <button disabled={text === ''}>Submit</button>
           </form>
         </div>
       </div>
