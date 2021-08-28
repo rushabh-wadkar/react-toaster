@@ -1,0 +1,8 @@
+.toasters {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
