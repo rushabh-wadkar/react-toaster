@@ -1,18 +1,25 @@
 import ReactDOM from 'react-dom';
-import { useState, useCallback } from 'react';
+import React from 'react';
+import { useState, useCallback, useImperativeHandle } from 'react';
 import { uuid } from 'shared';
 
 import styles from './styles.module.css';
 import { useToasts } from 'hooks';
 import { Toasts } from 'components';
 
-export const ToastPortal = () => {
-  const [toasts, setToasts] = useState([
-    { id: uuid(), text: 'Hello', mode: 'primary' },
-    { id: uuid(), text: 'World', mode: 'danger' },
-    { id: uuid(), text: 'Warning', mode: 'warning' },
-  ]);
+export const ToastPortal = React.forwardRef((props, ref) => {
+  const [toasts, setToasts] = useState([]);
   const [isShown, toastId] = useToasts();
+  useImperativeHandle(
+    ref,
+    () => ({
+      addToasts: toast => {
+        console.log(toasts);
+        setToasts([...toasts, { ...toast, id: uuid() }]);
+      },
+    }),
+    [toasts],
+  );
   const closeToastHandler = useCallback(
     id => {
       setToasts(toasts => toasts.filter(t => t.id !== id));
@@ -35,4 +42,4 @@ export const ToastPortal = () => {
         document.getElementById(toastId),
       )
     : null;
-};
+});
