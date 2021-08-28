@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 
 import { useState } from 'react';
+import { ToastPortal } from 'components';
 
 export const App = () => {
   const [text, setText] = useState('');
@@ -12,32 +13,36 @@ export const App = () => {
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.header}>Portals and Toaster</h1>
+        <h1 className={styles.header}>Toaster Notifications</h1>
         <div className={styles.content}>
           <img src="/assets/toaster.png" alt="toaster" />
           <form onSubmit={onFormSubmit}>
             <div className={styles.autoClose}>
               <input
+                name="auto-close-checkbox"
+                id="auto-close-checkbox"
                 type="checkbox"
                 value={autoClose}
                 onChange={e => setAutoClose(e.target.checked)}
               />
-              <label>Auto close</label>
+              <label htmlFor="auto-close-checkbox">Auto close</label>
             </div>
 
             <select value={mode} onChange={e => setMode(e.target.value)}>
-              <option>Primary</option>
-              <option>Secondary</option>
-              <option>Info</option>
-              <option>Warning</option>
-              <option>Danger</option>
-              <option>Light</option>
-              <option>Dark</option>
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+              <option value="info">Info</option>
+              <option value="success">Succes</option>
+              <option value="warning">Warning</option>
+              <option value="danger">Danger</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
             </select>
 
             <input
               type="text"
               value={text}
+              placeholder="Toaster text"
               onChange={e => setText(e.target.value)}
             />
 
@@ -45,6 +50,7 @@ export const App = () => {
           </form>
         </div>
       </div>
+      <ToastPortal />
       <div className={styles.area}>
         <ul className={styles.circles}>
           <li></li>
