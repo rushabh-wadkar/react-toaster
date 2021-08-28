@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { uuid } from 'shared';
 
 import styles from './styles.module.css';
@@ -13,11 +13,23 @@ export const ToastPortal = () => {
     { id: uuid(), text: 'Warning', mode: 'warning' },
   ]);
   const [isShown, toastId] = useToasts();
+  const closeToastHandler = useCallback(
+    id => {
+      setToasts(toasts => toasts.filter(t => t.id !== id));
+    },
+    [setToasts],
+  );
   return isShown
     ? ReactDOM.createPortal(
         <div className={styles.toasters}>
           {toasts.map(toast => (
-            <Toasts key={toast.id} text={toast.text} mode={toast.mode} />
+            <Toasts
+              key={toast.id}
+              id={toast.id}
+              text={toast.text}
+              mode={toast.mode}
+              onClose={closeToastHandler}
+            />
           ))}
         </div>,
         document.getElementById(toastId),
