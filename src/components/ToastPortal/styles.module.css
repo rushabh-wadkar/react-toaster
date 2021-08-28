@@ -1,8 +1,11 @@
 .toasters {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 200px;
   gap: 10px;
   flex-direction: column;
   position: fixed;
   top: 20px;
   right: 20px;
+  align-items: flex-end;
 }
