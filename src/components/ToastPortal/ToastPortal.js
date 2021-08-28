@@ -14,7 +14,6 @@ export const ToastPortal = React.forwardRef((props, ref) => {
     ref,
     () => ({
       addToasts: toast => {
-        console.log(toasts);
         setToasts([...toasts, { ...toast, id: uuid() }]);
       },
     }),
