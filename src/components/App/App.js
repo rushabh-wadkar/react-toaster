@@ -1,14 +1,22 @@
 import styles from './styles.module.css';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ToastPortal } from 'components';
 
 export const App = () => {
   const [text, setText] = useState('');
   const [mode, setMode] = useState('primary');
   const [autoClose, setAutoClose] = useState(false);
+  const ref = useRef(null);
   const onFormSubmit = e => {
     e.preventDefault();
+    const input = {
+      text,
+      mode,
+      autoClose,
+    };
+    ref.current.addToasts(input);
+    setText('');
   };
   return (
     <>
@@ -50,7 +58,7 @@ export const App = () => {
           </form>
         </div>
       </div>
-      <ToastPortal />
+      <ToastPortal ref={ref} />
       <div className={styles.area}>
         <ul className={styles.circles}>
           <li></li>
