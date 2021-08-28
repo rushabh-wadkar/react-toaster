@@ -40,7 +40,7 @@ export const App = () => {
               <option value="primary">Primary</option>
               <option value="secondary">Secondary</option>
               <option value="info">Info</option>
-              <option value="success">Succes</option>
+              <option value="success">Success</option>
               <option value="warning">Warning</option>
               <option value="danger">Danger</option>
               <option value="light">Light</option>
