@@ -4,7 +4,7 @@ import { useState, useCallback, useImperativeHandle } from 'react';
 import { uuid } from 'shared';
 
 import styles from './styles.module.css';
-import { useToasts } from 'hooks';
+import { useAutoCloseToasts, useToasts } from 'hooks';
 import { Toasts } from 'components';
 
 export const ToastPortal = React.forwardRef((props, ref) => {
@@ -25,6 +25,9 @@ export const ToastPortal = React.forwardRef((props, ref) => {
     },
     [setToasts],
   );
+
+  useAutoCloseToasts({ toasts, setToasts });
+
   return isShown
     ? ReactDOM.createPortal(
         <div className={styles.toasters}>
